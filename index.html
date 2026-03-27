@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Haven - Delicious Baked Treats</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #5a3f2e;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 248, 220, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #d4a574;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #5a3f2e;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #d4a574;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #5a3f2e;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 1rem;
+            color: #5a3f2e;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            margin-bottom: 2rem;
+            color: #7a5c4a;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(45deg, #d4a574, #ff9a56);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(212, 165, 116, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 165, 116, 0.4);
+        }
+
+        /* Floating Cookies */
+        .floating-cookie {
+            position: absolute;
+            font-size: 4rem;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        .cookie1 { top: 20%; left: 10%; animation-delay: 0s; }
+        .cookie2 { top: 60%; right: 15%; animation-delay: 2s; }
+        .cookie3 { bottom: 20%; left: 20%; animation-delay: 4s; }
+
+        /* Products Section */
+        .products {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 4rem;
+            color: #5a3f2e;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 250px;
+            background: linear-gradient(45deg, #ffecd2, #fcb69f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #5a3f2e;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #d4a574;
+            margin-bottom: 1rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 5%;
+            background: #fff8dc;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #5a3f2e;
+        }
+
+        .about-image {
+            height: 400px;
+            background: linear-gradient(45deg, #ff9a56, #d4a574);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 5%;
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #5a3f2e;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #d4a574;
+        }
+
+        /* Footer */
+        footer {
+            background: #5a3f2e;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 100%;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(255, 248, 220, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav {
+                padding: 1rem 3%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">🍪 Cookie Haven</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="floating-cookie cookie1">🍪</div>
+        <div class="floating-cookie cookie2">🥜</div>
+        <div class="floating-cookie cookie3">🍪</div>
+        <div class="hero-content">
+            <h1>Heavenly Cookies & Biscuits</h1>
+            <p>Freshly baked with love, every bite tells a story of tradition and passion.</p>
+            <a href="#products" class="cta-button">Explore Treats</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <h2 class="section-title">Our Delicious Treats</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">🍪</div>
+                <div class="product-info">
+                    <h3>Chocolate Chip Cookies</h3>
+                    <div class="product-price">$3.99</div>
+                    <p>Classic chocolate chip cookies with premium Belgian chocolate chunks.</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🥜</div>
+                <div class="product-info">
+                    <h3>Peanut Butter Bites</h3>
+                    <div class="product-price">$4.49</div>
+                    <p>Crispy edges with creamy peanut butter center. Perfect crunch!</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🍯</div>
+                <div class="product-info">
+                    <h3>Honey Oat Biscuits</h3>
+                    <div class="product-price">$3.29</div>
+                    <p>Golden honey and rolled oats for the perfect breakfast biscuit.</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🍋</div>
+                <div class="product-info">
+                    <h3>Lemon Shortbread</h3>
+                    <div class="product-price">$3.79</div>
+                    <p>Buttery shortbread with zesty lemon glaze. Refreshingly tangy!</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🌰</div>
+                <div class="product-info">
+                    <h3>Almond Crescents</h3>
+                    <div class="product-price">$4.99</div>
+                    <p>Delicate almond cookies dusted with powdered sugar.</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🍪</div>
+                <div class="product-info">
+                    <h3>Oatmeal Raisin</h3>
+                    <div class="product-price">$3.59</div>
+                    <p>Chewy oatmeal cookies packed with plump raisins and cinnamon.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-container">
+            <div class="about-text">
+                <h2>Baked with ❤️ Since 1985</h2>
+                <p>From our family kitchen to your table. Three generations of baking perfection. 
+                   We use only the finest ingredients and time-honored recipes to create 
+                   cookies and biscuits that bring joy to every moment.</p>
+                <p>Every batch is baked fresh daily with real butter, farm-fresh eggs, 
+                   and pure vanilla extract. Taste the difference quality makes!</p>
+            </div>
+            <div class="about-image">👩‍🍳</div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Ready to Order?</h2>
+        <p>Visit us or order online for delivery!</p>
+        <div class="contact-links">
+            <a href="#" class="contact-link"><i class="fas fa-phone"></i> (555) 123-4567</a>
+            <a href="#" class="contact-link"><i class="fas fa-map-marker-alt"></i> 123 Baker St</a>
+            <a href="#" class="contact-link"><i class="fas fa-envelope"></i> hello@cookiehaven.com</a>
+            <a href="#" class="contact-link"><i class="fab fa-whatsapp"></i> WhatsApp Orders</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Cookie Haven. All rights reserved. 🍪🥐</p>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 248, 220, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 248, 220, 0.95)';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe product cards
+        document.querySelectorAll('.product-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Parallax effect for floating cookies
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const cookies = document.querySelectorAll('.floating-cookie');
+            cookies.forEach((cookie, index) => {
+                const speed = 0.5 + (index * 0.2);
+                cookie.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
